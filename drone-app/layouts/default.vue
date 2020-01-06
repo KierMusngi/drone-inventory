@@ -9,13 +9,13 @@
       overflow
     >
       <v-list dense>
-        <v-list-item link>
+        <v-list-item link @click="goToScan">
           <v-list-item-action>
             <v-icon>mdi-qrcode-scan</v-icon>
           </v-list-item-action>
         </v-list-item>
 
-        <v-list-item link>
+        <v-list-item link @click="goToInventory">
           <v-list-item-action>
             <v-icon>mdi-package-variant-closed</v-icon>
           </v-list-item-action>
@@ -56,6 +56,15 @@
     data: () => ({
         drawer: false,
     }),
+
+    methods: {
+      goToScan(){
+        this.$nuxt.$router.replace({path : '/scan'});
+      },
+      goToInventory(){
+        this.$nuxt.$router.replace({path : '/inventory'});
+      },
+    },
   }
 </script>
 

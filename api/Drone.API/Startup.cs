@@ -32,6 +32,16 @@ namespace Drone.API
                     .ServerVersion(new ServerVersion(new Version(8, 0, 18), ServerType.MySql))
             ));
 
+            services.AddCors(option => {
+                option.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddScoped<IRepository<ContainerEntity>, Repository<ContainerEntity>>();
 
             services.AddControllers();
@@ -44,6 +54,8 @@ namespace Drone.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 
