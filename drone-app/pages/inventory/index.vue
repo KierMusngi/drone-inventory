@@ -18,7 +18,8 @@
             :headers="headers"
             :items="containers"
             :items-per-page="15"
-          class="elevation-12"
+            class="elevation-12"
+            @click:row="(item) => toView(item)"
           ></v-data-table>
         </v-card>
       </v-flex>
@@ -52,6 +53,9 @@ export default {
       }).catch((err) => {
         console.log(err);
       });
+    },
+    toView(item){
+      this.$nuxt.$router.replace({path : '/inventory/view/' + item.id});
     }
   }
 }
