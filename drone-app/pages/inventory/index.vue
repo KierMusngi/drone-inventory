@@ -24,6 +24,11 @@
         </v-card>
       </v-flex>
     </v-layout>
+
+    <v-layout>
+      <v-flex md12 pa-2>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -48,7 +53,7 @@ export default {
   },
   methods: {
     getContainers(){
-      this.$axios.$get('https://localhost:44367/api/containers').then((result) => {
+      this.$axios.$get('http://localhost:51757/api/containers').then((result) => {
         this.containers = result;
       }).catch((err) => {
         console.log(err);

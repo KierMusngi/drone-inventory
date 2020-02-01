@@ -29,8 +29,7 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [],
   /*
   ** Nuxt.js dev-modules
   */
@@ -44,12 +43,14 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/auth',
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL : 'http://localhost:51757/api',
   },
   /*
   ** vuetify module configuration
@@ -72,14 +73,46 @@ export default {
       }
     }
   },
+
   /*
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
+  /*
+  ** You can extend webpack config here
+  */
     extend (config, ctx) {
     }
+  },
+
+  // server: {
+  //   port: 3000, // default: 3000
+  //   host: '0.0.0.0' // default: localhost
+  // },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/token', method: 'post', propertyName: 'token' },
+          logout: false,
+          user: { url: '/auth/users/me', method: 'get', propertyName: 'user' }
+        },
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+      }
+    },
+
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/inventory'
+    },
+
+    rewriteRedirects : false
+  },
+
+  router: {
+    middleware: ['auth']
   }
 }

@@ -1,14 +1,19 @@
 using System;
+using System.Text;
+using Drone.API.Hubs;
+using Drone.API.Models.Settings;
 using Drone.DataAccess;
 using Drone.DataAccess.Entities;
 using Drone.DataAccess.Repositories;
 using Drone.DataAccess.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Pomelo.EntityFrameworkCore.MySql.Storage;
 
@@ -36,11 +41,38 @@ namespace Drone.API
                 option.AddPolicy("CorsPolicy", builder =>
                 {
                     builder
-                        .AllowAnyOrigin()
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .WithOrigins("http://localhost:3000");
                 });
             });
+
+            var tokenSettings = new TokenSettings();
+            Configuration.GetSection(nameof(TokenSettings)).Bind(tokenSettings);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(tokenSettings.Secret)),
+                    ValidIssuer = tokenSettings.Issuer,
+                    ValidAudience = tokenSettings.Audience,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            services.AddSingleton(tokenSettings);
+
+            services.AddSignalR();
 
             services.AddScoped<IRepository<ContainerEntity>, Repository<ContainerEntity>>();
 
@@ -66,6 +98,7 @@ namespace Drone.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ScannerHub>("/scannerHub");
             });
         }
     }

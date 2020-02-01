@@ -21,7 +21,7 @@
           </v-list-item-action>
         </v-list-item>
 
-        <v-list-item link>
+        <v-list-item link @click="goToLogin">
           <v-list-item-action>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-action>
@@ -64,6 +64,9 @@
       goToInventory(){
         this.$nuxt.$router.replace({path : '/inventory'});
       },
+      async goToLogin(){
+        await this.$auth.logout()
+      }
     },
   }
 </script>
