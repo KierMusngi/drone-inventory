@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="default-layout">
     <v-navigation-drawer
       v-model="drawer"
       floating
@@ -70,4 +70,12 @@
     },
   }
 </script>
+
+<style scoped>
+  .default-layout{
+    background-image: url('../assets/drone-bg.jpg');
+    background-size: cover;
+  }
+
+</style>
 

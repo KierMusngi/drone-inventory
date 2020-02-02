@@ -62,6 +62,7 @@
                       color="#26B47F" 
                       block 
                       dark
+                      rounded
                       @click="login"
                   >Login</v-btn>
                 </v-col>
@@ -90,7 +91,6 @@ export default {
           password : this.password  
         }
       }).then(() => {
-        alert(this.$auth.user);
       });
     }
   }

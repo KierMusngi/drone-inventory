@@ -2,7 +2,7 @@
 <div>
   <v-layout row wrap px-12 pt-12>
     <v-flex md12>
-      <h1>Scanner</h1>
+      <h1 class="white--text">Scanner</h1>
     </v-flex>
   </v-layout>
 
@@ -48,7 +48,14 @@
 
   <v-layout px-12>
     <v-flex md12>
-      <v-btn @click="save" block color="#26B47F" dark>Accept</v-btn>  
+      <v-btn 
+        @click="save" 
+        block 
+        rounded
+        color="#26B47F" 
+        class="white--text"
+        :disabled='this.name === ""'
+      >Accept</v-btn>  
     </v-flex>    
   </v-layout>
 
@@ -59,7 +66,14 @@
 
   <v-layout px-12>
     <v-flex md12>
-      <v-btn @click="clear" block color="#CE1127" dark>Decline</v-btn>  
+      <v-btn 
+        @click="clear" 
+        block 
+        rounded
+        color="#CE1127" 
+        class="white--text" 
+        :disabled='this.name === ""'
+      >Decline</v-btn>  
     </v-flex>    
   </v-layout>
 
@@ -71,7 +85,7 @@
   <v-snackbar
       v-model="snackbar"
       color="green"
-      timeout="2000"
+      :timeout=2000
       top
     >
       {{ text }}
@@ -93,7 +107,7 @@ export default {
   }),
   created(){
     this.connection = new signalR.HubConnectionBuilder()
-        .withUrl("http://localhost:51757/scannerHub")
+        .withUrl(process.env.SIGNALR_BASE_URL + '/scannerHub')
         .withAutomaticReconnect()
         .build();
 
@@ -117,7 +131,7 @@ export default {
       this.serialNumber = ""
     },
     save(){
-      this.$axios.$post('http://localhost:51757/api/containers', {
+      this.$axios.$post(`${process.env.API_BASE_URL}/containers/`, {
         name : this.name,
         description : this.description,
         serialNumber : this.serialNumber

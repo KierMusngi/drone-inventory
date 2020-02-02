@@ -2,7 +2,7 @@
 <div>
     <v-layout row wrap px-12 pt-12>
       <v-flex md12>
-        <h1>Containers</h1>
+        <h1 class="white--text">Containers</h1>
       </v-flex>
     </v-layout>
 
@@ -17,7 +17,7 @@
           <v-data-table
             :headers="headers"
             :items="containers"
-            :items-per-page="15"
+            :items-per-page="10"
             class="elevation-12"
             @click:row="(item) => toView(item)"
           ></v-data-table>
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     getContainers(){
-      this.$axios.$get('http://localhost:51757/api/containers').then((result) => {
+      this.$axios.$get(`${process.env.API_BASE_URL}/containers`).then((result) => {
         this.containers = result;
       }).catch((err) => {
         console.log(err);
