@@ -31,6 +31,12 @@ namespace Drone.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var tokenSettings = new TokenSettings();
+            Configuration.GetSection(nameof(TokenSettings)).Bind(tokenSettings);
+
+            var corsSettings = new CorsSettings();
+            Configuration.GetSection(nameof(CorsSettings)).Bind(corsSettings);
+
             services.AddDbContextPool<DroneContext>(options => options
                 .UseMySql(Configuration
                     .GetConnectionString("DatabaseConnection"), mySqlOptions => mySqlOptions
@@ -44,12 +50,9 @@ namespace Drone.API
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials()
-                        .WithOrigins("http://localhost:3000");
+                        .WithOrigins(corsSettings.AllowedOrigin);
                 });
             });
-
-            var tokenSettings = new TokenSettings();
-            Configuration.GetSection(nameof(TokenSettings)).Bind(tokenSettings);
 
             services.AddAuthentication(x =>
             {
@@ -71,6 +74,7 @@ namespace Drone.API
             });
 
             services.AddSingleton(tokenSettings);
+            services.AddSingleton(corsSettings);
 
             services.AddSignalR();
 
