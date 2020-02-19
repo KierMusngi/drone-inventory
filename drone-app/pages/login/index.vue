@@ -16,7 +16,6 @@
                 lg="4"
             >
             <v-card 
-                color="white" 
                 class="elevation-12"
             >
             <v-col class="pr-12 pl-12">
@@ -39,6 +38,7 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
+                    ref="focusMe"
                     label="Username"
                     name="username"
                     type="text"
@@ -59,10 +59,9 @@
                 <v-col class="pr-6 pl-6">
                   <v-btn 
                       class="elevation-10"
-                      color="#26B47F" 
                       block 
-                      dark
                       rounded
+                      color="#26B47F"
                       @click="login"
                   >Login</v-btn>
                 </v-col>
@@ -71,6 +70,14 @@
             </v-col>
             </v-row>
         </v-layout>
+        <v-snackbar
+          v-model="invalidUser"
+          color="red"
+          :timeout=1000
+          top
+        >
+          {{ text }}
+        </v-snackbar>
     </v-container>
 </template>
 
@@ -80,8 +87,13 @@ export default {
   data(){
     return{
       username : "",
-      password : ""
+      password : "",
+      invalidUser: false,
+      text: "Invalid user."
     };
+  },
+  mounted(){
+    this.focusInput()
   },
   methods:{
     login(){
@@ -91,7 +103,12 @@ export default {
           password : this.password  
         }
       }).then(() => {
+      }).catch(() => {
+        this.invalidUser = true
       });
+    },
+    focusInput() {
+      this.$refs.focusMe.focus();
     }
   }
 }

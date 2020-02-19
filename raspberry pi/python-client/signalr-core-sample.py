@@ -2,7 +2,7 @@
 import sys
 from signalrcore.hub_connection_builder import HubConnectionBuilder
 
-server_url = "ws://54.179.139.55:8090/scannerHub"
+server_url = "ws://localhost:51757/scannerHub"
 print("Server set to: " + server_url)
 
 # add this if you want logs
@@ -43,7 +43,7 @@ while message != "exit()":
 
     name = "Item Name"
     description = "Item Description"
-    serialNumber = "Item SerialNumber"
+    serialNumber = "ABC123"
 
     try:
         hub_connection.send("Send", [name, description, serialNumber])

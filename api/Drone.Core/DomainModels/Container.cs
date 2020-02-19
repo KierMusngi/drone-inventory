@@ -8,12 +8,14 @@ namespace Drone.Core.DomainModels
             string name,
             string description,
             string serialNumber,
+            DateTime dateCreated,
             int id = 0)
         {
             Id = id;
             Name = name;
             Description = description;
             SerialNumber = serialNumber;
+            DateCreated = dateCreated;
         }
 
         public int Id { get; private set; }

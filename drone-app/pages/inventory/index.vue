@@ -42,9 +42,10 @@ export default {
         sortable: false,
         value: 'id',
       },
+      { text: 'Serial Number', value: 'serialNumber' },
       { text: 'Name', value: 'name' },
       { text: 'Description', value: 'description' },
-      { text: 'Serial Number', value: 'serialNumber' }
+       {text: 'Date Created', value: 'dateCreated'}
     ],
     containers: []
   }),

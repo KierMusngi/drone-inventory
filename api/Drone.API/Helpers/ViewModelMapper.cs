@@ -5,14 +5,16 @@ namespace Drone.API.Helpers
 {
     public static class ViewModelMapper
     {
-        public static ContainerView ToViewModel(this Container container)
+        public static ContainerView ToViewModel(this Container container, int containerQuantity)
         {
             return new ContainerView()
             {
                 Id = container.Id,
                 Name = container.Name,
                 Description = container.Description,
-                SerialNumber = container.SerialNumber
+                SerialNumber = container.SerialNumber,
+                DateCreated = container.DateCreated.ToString("dddd, dd MMMM yyyy hh:mm tt"),
+                Quantity = containerQuantity
             };
         }
     }

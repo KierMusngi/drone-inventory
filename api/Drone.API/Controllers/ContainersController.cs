@@ -18,11 +18,11 @@ namespace Drone.API.Controllers
     public class ContainersController : ControllerBase
     {
         private readonly DroneContext _context;
-        private readonly IRepository<ContainerEntity> _containerRepository;
+        private readonly IContainerRepository _containerRepository;
 
         public ContainersController(
             DroneContext context,
-            IRepository<ContainerEntity> containerRepository)
+            IContainerRepository containerRepository)
         {
             _context = context;
             _containerRepository = containerRepository;
@@ -45,7 +45,7 @@ namespace Drone.API.Controllers
                 var containerViews = new List<ContainerView>();
                 containers.ForEach(container =>
                 {
-                    containerViews.Add(container.ToViewModel());
+                    containerViews.Add(container.ToViewModel(0));
                 });
 
                 return new OkObjectResult(containerViews);
@@ -63,9 +63,12 @@ namespace Drone.API.Controllers
             try
             {
                 var containerEntity = await _containerRepository.GetById(containerId);
+                var containerQuantity = _containerRepository
+                    .GetContainerCountBySerialNumber(containerEntity.SerialNumber);
+
                 var container = containerEntity.ToDomainModel();
 
-                return new OkObjectResult(container.ToViewModel());
+                return new OkObjectResult(container.ToViewModel(containerQuantity));
             }
             catch (Exception exception)
             {
@@ -82,50 +85,19 @@ namespace Drone.API.Controllers
                 var container = new Container(
                     name: containerRequest.Name,
                     description: containerRequest.Description,
-                    serialNumber: containerRequest.SerialNumber);
+                    serialNumber: containerRequest.SerialNumber,
+                    dateCreated: DateTime.Now);
 
                 var containerEntity = new ContainerEntity()
                 {
                     Id = container.Id,
                     Name = container.Name,
                     Description = container.Description,
-                    SerialNumber = container.SerialNumber
+                    SerialNumber = container.SerialNumber,
+                    DateCreated = container.DateCreated
                 };
 
                 await _containerRepository.Add(containerEntity);
-                await _context.SaveChangesAsync();
-
-                return new OkResult();
-            }
-            catch (Exception exception)
-            {
-                return new BadRequestObjectResult(exception.Message.ToString());
-            }
-        }
-
-        // PUT: api/Containers/5
-        [HttpPut("{containerId}")]
-        public async Task<IActionResult> UpdateContainer(
-            int containerId, 
-            ContainerRequest containerRequest)
-        {
-            try
-            {
-                var container = new Container(
-                    name: containerRequest.Name,
-                    description: containerRequest.Description,
-                    serialNumber: containerRequest.SerialNumber,
-                    id: containerId);
-
-                var containerEntity = new ContainerEntity()
-                {
-                    Id = container.Id,
-                    Name = container.Name,
-                    Description = container.Description,
-                    SerialNumber = container.SerialNumber
-                };
-
-                _containerRepository.Update(containerEntity);
                 await _context.SaveChangesAsync();
 
                 return new OkResult();

@@ -11,6 +11,7 @@ namespace Drone.Core.Helpers
                 name: containerEntity.Name,
                 description: containerEntity.Description,
                 serialNumber: containerEntity.SerialNumber,
+                dateCreated: containerEntity.DateCreated,
                 id: containerEntity.Id);
         }
     }

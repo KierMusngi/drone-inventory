@@ -9,5 +9,9 @@
         public string Description { get; set; }
 
         public string SerialNumber { get; set; }
+
+        public string DateCreated { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

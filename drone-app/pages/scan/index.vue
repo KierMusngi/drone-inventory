@@ -2,7 +2,7 @@
 <div>
   <v-layout row wrap px-12 pt-12>
     <v-flex md12>
-      <h1 class="white--text">Scanner</h1>
+      <h1 class="white--text">QR Scanner</h1>
     </v-flex>
   </v-layout>
 
@@ -13,28 +13,28 @@
 
   <v-layout px-12>
     <v-flex md12>
-      <v-card class="elevation-12" color="#FFFFFF">
+      <v-card class="elevation-12">
         <v-card-text>
           <v-text-field
             label="Name"
             type="text"
             v-model="name"
-            light
             readonly
+            placeholder=" "
           ></v-text-field>
           <v-text-field
             label="Description"
             type="text"
             v-model="description"
-            light
             readonly
+            placeholder=" "
           ></v-text-field>
           <v-text-field
             label="Serial Number"
             type="text"
             v-model="serialNumber"
-            light
             readonly
+            placeholder=" "
           ></v-text-field>
         </v-card-text>
       </v-card>

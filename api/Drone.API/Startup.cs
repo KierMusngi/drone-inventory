@@ -75,10 +75,10 @@ namespace Drone.API
 
             services.AddSingleton(tokenSettings);
             services.AddSingleton(corsSettings);
-
+            
             services.AddSignalR();
 
-            services.AddScoped<IRepository<ContainerEntity>, Repository<ContainerEntity>>();
+            services.AddScoped<IContainerRepository, ContainerRepository>();
 
             services.AddControllers();
         }
