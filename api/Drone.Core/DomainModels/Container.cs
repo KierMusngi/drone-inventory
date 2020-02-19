@@ -1,4 +1,6 @@
-﻿namespace Drone.Core.DomainModels
+﻿using System;
+
+namespace Drone.Core.DomainModels
 {
     public class Container
     {
@@ -14,12 +16,14 @@
             SerialNumber = serialNumber;
         }
 
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; private set; }
+
+        public DateTime DateCreated { get; private set; }
     }
 }

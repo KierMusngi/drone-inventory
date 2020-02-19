@@ -2,7 +2,7 @@
 import sys
 from signalrcore.hub_connection_builder import HubConnectionBuilder
 
-server_url = "ws://localhost:51757/scannerHub"
+server_url = "ws://54.179.139.55:8090/scannerHub"
 print("Server set to: " + server_url)
 
 # add this if you want logs
