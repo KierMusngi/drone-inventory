@@ -1,4 +1,6 @@
-﻿namespace Drone.API.Models.Requests
+﻿using System;
+
+namespace Drone.API.Models.Requests
 {
     public class ContainerRequest
     {
@@ -7,5 +9,11 @@
         public string Description { get; set; }
 
         public string SerialNumber { get; set; }
+
+        public int ItemCount { get; set; }
+
+        public DateTime ExpirationDate { get; set; }
+
+        public DateTime ManufacturingDate { get; set; }
     }
 }

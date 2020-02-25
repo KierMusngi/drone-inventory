@@ -45,7 +45,8 @@ export default {
       { text: 'Serial Number', value: 'serialNumber' },
       { text: 'Name', value: 'name' },
       { text: 'Description', value: 'description' },
-       {text: 'Date Created', value: 'dateCreated'}
+      { text: 'Item Count', value: 'itemCount' },
+      { text: 'Date Created', value: 'dateCreated'}
     ],
     containers: []
   }),

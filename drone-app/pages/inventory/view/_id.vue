@@ -34,9 +34,27 @@
             readonly
           ></v-text-field>
           <v-text-field
-            label="Quantity"
+            label="Box Count"
             type="text"
-            v-model="quantity"
+            v-model="boxCount"
+            readonly
+          ></v-text-field>
+          <v-text-field
+            label="Item Count"
+            type="text"
+            v-model="itemCount"
+            readonly
+          ></v-text-field>
+          <v-text-field
+            label="Expiration Date"
+            type="text"
+            v-model="expirationDate"
+            readonly
+          ></v-text-field>
+          <v-text-field
+            label="Manufacturing Date"
+            type="text"
+            v-model="manufacturingDate"
             readonly
           ></v-text-field>
           <v-text-field
@@ -143,7 +161,10 @@ export default {
     description : "",
     serialNumber: "",
     dateCreated: "",
-    quantity: 0,
+    boxCount: 0,
+    itemCount: 0,
+    expirationDate: "",
+    manufacturingDate: "",
     deleteDialog: false,
     snackbar: false,
     text: "Container successfully deleted."
@@ -158,7 +179,10 @@ export default {
         this.description = result.description,
         this.serialNumber = result.serialNumber,
         this.dateCreated = result.dateCreated,
-        this.quantity = result.quantity
+        this.boxCount = result.boxCount
+        this.itemCount = result.itemCount,
+        this.expirationDate = result.expirationDate,
+        this.manufacturingDate = result.manufacturingDate
       }).catch((err) => {
         console.log(err);
       });

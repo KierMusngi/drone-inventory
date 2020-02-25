@@ -86,6 +86,9 @@ namespace Drone.API.Controllers
                     name: containerRequest.Name,
                     description: containerRequest.Description,
                     serialNumber: containerRequest.SerialNumber,
+                    itemCount: containerRequest.ItemCount,
+                    expirationDate: containerRequest.ExpirationDate,
+                    manufacturingDate: containerRequest.ManufacturingDate,
                     dateCreated: DateTime.Now);
 
                 var containerEntity = new ContainerEntity()
@@ -94,6 +97,9 @@ namespace Drone.API.Controllers
                     Name = container.Name,
                     Description = container.Description,
                     SerialNumber = container.SerialNumber,
+                    ItemCount = container.ItemCount,
+                    ExpirationDate = container.ExpirationDate,
+                    ManufacturingDate = container.ManufacturingDate,
                     DateCreated = container.DateCreated
                 };
 

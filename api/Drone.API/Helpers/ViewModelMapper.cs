@@ -13,8 +13,11 @@ namespace Drone.API.Helpers
                 Name = container.Name,
                 Description = container.Description,
                 SerialNumber = container.SerialNumber,
+                ItemCount = container.ItemCount,
+                ExpirationDate = container.ExpirationDate.ToString("dd MMMM yyyy"),
+                ManufacturingDate = container.ManufacturingDate.ToString("dd MMMM yyyy"),
                 DateCreated = container.DateCreated.ToString("dddd, dd MMMM yyyy hh:mm tt"),
-                Quantity = containerQuantity
+                BoxCount = containerQuantity
             };
         }
     }

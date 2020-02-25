@@ -36,6 +36,27 @@
             readonly
             placeholder=" "
           ></v-text-field>
+          <v-text-field
+            label="Item Count"
+            type="text"
+            v-model="itemCount"
+            readonly
+            placeholder=" "
+          ></v-text-field>
+          <v-text-field
+            label="Expiration Date"
+            type="text"
+            v-model="expirationDate"
+            readonly
+            placeholder=" "
+          ></v-text-field>
+          <v-text-field
+            label="Manufacturing Date"
+            type="text"
+            v-model="manufacturingDate"
+            readonly
+            placeholder=" "
+          ></v-text-field>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -101,6 +122,9 @@ export default {
     name : "",
     description : "",
     serialNumber: "",
+    itemCount: 0,
+    expirationDate: "",
+    manufacturingDate: "",
     connection: {},
     snackbar: false,
     text: "Container successfully added."
@@ -118,10 +142,13 @@ export default {
   },
   mounted(){
     var thisVue = this
-    thisVue.connection.on("receive", function (name, description, serialNumber) {
+    thisVue.connection.on("receive", function (name, description, serialNumber, itemCount, expirationDate, manufacturingDate) {
         thisVue.name = name
         thisVue.description = description
         thisVue.serialNumber = serialNumber
+        thisVue.itemCount = itemCount
+        thisVue.expirationDate = expirationDate,
+        thisVue.manufacturingDate = manufacturingDate 
     });
   },
   methods:{
@@ -129,12 +156,18 @@ export default {
       this.name = ""
       this.description = ""
       this.serialNumber = ""
+      this.itemCount = 0,
+      this.expirationDate = "",
+      this.manufacturingDate = ""
     },
     save(){
       this.$axios.$post(`${process.env.API_BASE_URL}/containers/`, {
         name : this.name,
         description : this.description,
-        serialNumber : this.serialNumber
+        serialNumber : this.serialNumber,
+        itemCount : this.itemCount,
+        expirationDate : this.expirationDate,
+        manufacturingDate : this.manufacturingDate
       }).then((result) => {
         this.clear();
         this.snackbar = true

@@ -5,18 +5,6 @@ from signalrcore.hub_connection_builder import HubConnectionBuilder
 server_url = "ws://localhost:51757/scannerHub"
 print("Server set to: " + server_url)
 
-# add this if you want logs
-
-# hub_connection = HubConnectionBuilder()\
-#     .with_url(server_url)\
-#     .configure_logging(logging.DEBUG)\
-#     .with_automatic_reconnect({
-#         "type": "raw",
-#         "keep_alive_interval": 10,
-#         "reconnect_interval": 5,
-#         "max_attempts": 5
-#     }).build()
-
 hub_connection = HubConnectionBuilder()\
     .with_url(server_url)\
     .with_automatic_reconnect({
@@ -44,9 +32,12 @@ while message != "exit()":
     name = "Item Name"
     description = "Item Description"
     serialNumber = "ABC123"
+    itemCount = 5
+    expirationDate = "2020-02-25"
+    manufacturingDate = "2020-02-25"
 
     try:
-        hub_connection.send("Send", [name, description, serialNumber])
+        hub_connection.send("Send", [name, description, serialNumber, itemCount, expirationDate, manufacturingDate])
     except:
         print("Something went wrong.")
 

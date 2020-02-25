@@ -14,6 +14,12 @@ namespace Drone.DataAccess.Entities
 
         public string SerialNumber { get; set; }
 
+        public int ItemCount { get; set; }
+
+        public DateTime ExpirationDate { get; set; }
+
+        public DateTime ManufacturingDate { get; set; }
+
         public DateTime DateCreated { get; set; }
     }
 }

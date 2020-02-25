@@ -10,8 +10,14 @@
 
         public string SerialNumber { get; set; }
 
+        public int ItemCount { get; set; }
+
+        public string ExpirationDate { get; set; }
+
+        public string ManufacturingDate { get; set; }
+
         public string DateCreated { get; set; }
 
-        public int Quantity { get; set; }
+        public int BoxCount { get; set; }
     }
 }
