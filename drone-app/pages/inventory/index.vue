@@ -46,6 +46,7 @@ export default {
       { text: 'Name', value: 'name' },
       { text: 'Description', value: 'description' },
       { text: 'Item Count', value: 'itemCount' },
+      { text: 'Box Count', value: 'boxCount' },
       { text: 'Date Created', value: 'dateCreated'}
     ],
     containers: []

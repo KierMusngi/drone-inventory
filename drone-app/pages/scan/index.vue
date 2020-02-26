@@ -44,6 +44,20 @@
             placeholder=" "
           ></v-text-field>
           <v-text-field
+            label="Box Count"
+            type="text"
+            v-model="boxCount"
+            readonly
+            placeholder=" "
+          ></v-text-field>
+          <v-text-field
+            label="Placement"
+            type="text"
+            v-model="placement"
+            readonly
+            placeholder=" "
+          ></v-text-field>
+          <v-text-field
             label="Expiration Date"
             type="text"
             v-model="expirationDate"
@@ -123,6 +137,8 @@ export default {
     description : "",
     serialNumber: "",
     itemCount: 0,
+    boxCount: 0,
+    placement: "",
     expirationDate: "",
     manufacturingDate: "",
     connection: {},
@@ -142,11 +158,13 @@ export default {
   },
   mounted(){
     var thisVue = this
-    thisVue.connection.on("receive", function (name, description, serialNumber, itemCount, expirationDate, manufacturingDate) {
+    thisVue.connection.on("receive", function (name, description, serialNumber, itemCount, boxCount, placement, expirationDate, manufacturingDate) {
         thisVue.name = name
         thisVue.description = description
         thisVue.serialNumber = serialNumber
         thisVue.itemCount = itemCount
+        thisVue.boxCount = boxCount,
+        thisVue.placement = placement,
         thisVue.expirationDate = expirationDate,
         thisVue.manufacturingDate = manufacturingDate 
     });
@@ -157,6 +175,8 @@ export default {
       this.description = ""
       this.serialNumber = ""
       this.itemCount = 0,
+      this.boxCount = 0,
+      this.placement = "",
       this.expirationDate = "",
       this.manufacturingDate = ""
     },
@@ -166,6 +186,8 @@ export default {
         description : this.description,
         serialNumber : this.serialNumber,
         itemCount : this.itemCount,
+        boxCount: this.boxCount,
+        placement: this.placement,
         expirationDate : this.expirationDate,
         manufacturingDate : this.manufacturingDate
       }).then((result) => {

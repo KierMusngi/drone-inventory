@@ -34,15 +34,21 @@
             readonly
           ></v-text-field>
           <v-text-field
+            label="Item Count"
+            type="text"
+            v-model="itemCount"
+            readonly
+          ></v-text-field>
+          <v-text-field
             label="Box Count"
             type="text"
             v-model="boxCount"
             readonly
           ></v-text-field>
           <v-text-field
-            label="Item Count"
+            label="Placement"
             type="text"
-            v-model="itemCount"
+            v-model="placement"
             readonly
           ></v-text-field>
           <v-text-field
@@ -161,8 +167,9 @@ export default {
     description : "",
     serialNumber: "",
     dateCreated: "",
-    boxCount: 0,
     itemCount: 0,
+    boxCount: 0,
+    placement: "",
     expirationDate: "",
     manufacturingDate: "",
     deleteDialog: false,
@@ -179,8 +186,9 @@ export default {
         this.description = result.description,
         this.serialNumber = result.serialNumber,
         this.dateCreated = result.dateCreated,
-        this.boxCount = result.boxCount
         this.itemCount = result.itemCount,
+        this.boxCount = result.boxCount,
+        this.placement = result.placement,
         this.expirationDate = result.expirationDate,
         this.manufacturingDate = result.manufacturingDate
       }).catch((err) => {

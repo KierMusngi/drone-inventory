@@ -33,11 +33,13 @@ while message != "exit()":
     description = "Item Description"
     serialNumber = "ABC123"
     itemCount = 5
+    boxCount = 10
+    placement = "Makati"
     expirationDate = "2020-02-25"
     manufacturingDate = "2020-02-25"
 
     try:
-        hub_connection.send("Send", [name, description, serialNumber, itemCount, expirationDate, manufacturingDate])
+        hub_connection.send("Send", [name, description, serialNumber, itemCount, boxCount, placement, expirationDate, manufacturingDate])
     except:
         print("Something went wrong.")
 
