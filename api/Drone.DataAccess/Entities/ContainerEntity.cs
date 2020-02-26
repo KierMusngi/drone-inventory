@@ -16,6 +16,10 @@ namespace Drone.DataAccess.Entities
 
         public int ItemCount { get; set; }
 
+        public int BoxCount { get; set; }
+
+        public string Placement { get; set; }
+
         public DateTime ExpirationDate { get; set; }
 
         public DateTime ManufacturingDate { get; set; }

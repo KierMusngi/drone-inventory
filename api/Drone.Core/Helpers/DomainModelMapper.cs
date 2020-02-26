@@ -12,6 +12,8 @@ namespace Drone.Core.Helpers
                 description: containerEntity.Description,
                 serialNumber: containerEntity.SerialNumber,
                 itemCount: containerEntity.ItemCount,
+                boxCount: containerEntity.BoxCount,
+                placement: containerEntity.Placement,
                 expirationDate: containerEntity.ExpirationDate,
                 manufacturingDate: containerEntity.ManufacturingDate,
                 dateCreated: containerEntity.DateCreated,

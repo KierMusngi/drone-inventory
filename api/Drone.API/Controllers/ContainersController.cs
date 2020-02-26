@@ -45,7 +45,7 @@ namespace Drone.API.Controllers
                 var containerViews = new List<ContainerView>();
                 containers.ForEach(container =>
                 {
-                    containerViews.Add(container.ToViewModel(0));
+                    containerViews.Add(container.ToViewModel());
                 });
 
                 return new OkObjectResult(containerViews);
@@ -68,7 +68,7 @@ namespace Drone.API.Controllers
 
                 var container = containerEntity.ToDomainModel();
 
-                return new OkObjectResult(container.ToViewModel(containerQuantity));
+                return new OkObjectResult(container.ToViewModel());
             }
             catch (Exception exception)
             {
@@ -87,6 +87,8 @@ namespace Drone.API.Controllers
                     description: containerRequest.Description,
                     serialNumber: containerRequest.SerialNumber,
                     itemCount: containerRequest.ItemCount,
+                    boxCount: containerRequest.BoxCount,
+                    placement: containerRequest.Placement,
                     expirationDate: containerRequest.ExpirationDate,
                     manufacturingDate: containerRequest.ManufacturingDate,
                     dateCreated: DateTime.Now);
@@ -98,6 +100,8 @@ namespace Drone.API.Controllers
                     Description = container.Description,
                     SerialNumber = container.SerialNumber,
                     ItemCount = container.ItemCount,
+                    BoxCount = container.BoxCount,
+                    Placement = container.Placement,
                     ExpirationDate = container.ExpirationDate,
                     ManufacturingDate = container.ManufacturingDate,
                     DateCreated = container.DateCreated

@@ -10,6 +10,8 @@ namespace Drone.API.Hubs
             string description, 
             string serialNumber, 
             int itemCount, 
+            int boxCount,
+            string placement,
             string expirationDate, 
             string manufacturingDate)
         {
@@ -19,6 +21,8 @@ namespace Drone.API.Hubs
                 description, 
                 serialNumber,
                 itemCount,
+                boxCount,
+                placement,
                 expirationDate,
                 manufacturingDate);
         }

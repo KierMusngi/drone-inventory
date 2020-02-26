@@ -12,12 +12,14 @@
 
         public int ItemCount { get; set; }
 
+        public int BoxCount { get; set; }
+
+        public string Placement { get; set; }
+
         public string ExpirationDate { get; set; }
 
         public string ManufacturingDate { get; set; }
 
         public string DateCreated { get; set; }
-
-        public int BoxCount { get; set; }
     }
 }
